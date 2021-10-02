@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "graphedge.h"
 #include "graphnode.h"
 
@@ -11,7 +13,7 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+    // delete _chatBot; 
 
     ////
     //// EOF STUDENT CODE
@@ -36,8 +38,11 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
 ////
 void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
+    std::cout << "in GraphNode::MoveChatbotHere" << std::endl;
     _chatBot = chatbot;
+    std::cout << "_chatBot->SetCurrentNode..." << std::endl;
     _chatBot->SetCurrentNode(this);
+    std::cout << "exiting GraphNode::MoveChatbotHere" << std::endl;
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
