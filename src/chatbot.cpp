@@ -44,6 +44,55 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot &source) // copy constructor
+    //   : _image{new wxBitmap{*(source._image)}}
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _image = new wxBitmap(*source._image);
+}
+
+ChatBot &ChatBot::operator=(const ChatBot &source)
+{
+    std::cout << "ChatBot Copy Assingment" << std::endl;
+    if (this == &source)
+        return *this;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _image = new wxBitmap(*source._image);
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&source)
+{
+    std::cout << "Move Constructor" << std::endl;
+    delete _image;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _image = new wxBitmap(*source._image);
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+    source._image = nullptr;
+}
+
+ChatBot &ChatBot::operator=(ChatBot &source)
+{
+    std::cout << "ChatBot Move Assingment" << std::endl;
+    if (this == &source)
+        return *this;
+    delete _image;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _image = new wxBitmap(*source._image);
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+    source._image = nullptr;
+    return *this;
+}
+
+
+
 
 ////
 //// EOF STUDENT CODE
@@ -84,8 +133,10 @@ void ChatBot::ReceiveMessageFromUser(std::string message)
 
 void ChatBot::SetCurrentNode(GraphNode *node)
 {
+    std::cout << "in ChatBot::SetCurrentNode" << std::endl;
     // update pointer to current node
     _currentNode = node;
+    std::cout << "update pointer to current node" << std::endl;
 
     // select a random node answer (if several answers should exist)
     std::vector<std::string> answers = _currentNode->GetAnswers();
@@ -94,7 +145,10 @@ void ChatBot::SetCurrentNode(GraphNode *node)
     std::string answer = answers.at(dis(generator));
 
     // send selected node answer to user
+    std::cout << "send selected node answer to user" << std::endl;
     _chatLogic->SendMessageToUser(answer);
+    std::cout << "exiting ChatBot::SetCurrentNode" << std::endl;
+
 }
 
 int ChatBot::ComputeLevenshteinDistance(std::string s1, std::string s2)
