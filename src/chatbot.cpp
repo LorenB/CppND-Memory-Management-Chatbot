@@ -49,7 +49,9 @@ ChatBot::ChatBot(const ChatBot &source) // copy constructor
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
     _rootNode = source._rootNode;
+    // TODO: is copying sufficient?
     _chatLogic = source._chatLogic;
+    // TODO: do we need to allocate more new memory?
     _image = new wxBitmap(*source._image);
 }
 
