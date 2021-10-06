@@ -74,7 +74,7 @@ void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T 
 
 void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 {
-    std::cout << "in ChatLogic::LoadAnswerGraphFromFile" << std::endl;
+    // std::cout << "in ChatLogic::LoadAnswerGraphFromFile" << std::endl;
     // load file with answer graph elements
     std::ifstream file(filename);
 
@@ -127,7 +127,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                     {
                         //// STUDENT CODE
                         ////
-                        std::cout << "type->second == NODE" << std::endl;
+                        // std::cout << "type->second == NODE" << std::endl;
 
                         // check if node with this ID exists already
                         auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](std::unique_ptr<GraphNode> &node) { return node->GetID() == id; });
@@ -158,7 +158,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                     {
                         //// STUDENT CODE
                         ////
-                        std::cout << "type->second == EDGE" << std::endl;
+                        // std::cout << "type->second == EDGE" << std::endl;
 
                         // find tokens for incoming (parent) and outgoing (child) node
                         auto parentToken = std::find_if(tokens.begin(), tokens.end(), [](const std::pair<std::string, std::string> &pair) { return pair.first == "PARENT"; });
@@ -198,7 +198,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                 }
             }
         } // eof loop over all lines in the file
-        std::cout << "closing file" << std::endl;
+        // std::cout << "closing file" << std::endl;
         file.close();
         
 
@@ -213,7 +213,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     ////
 
     // identify root node
-    std::cout << "identify root node" << std::endl;
+    // std::cout << "identify root node" << std::endl;
 
     GraphNode *rootNode = nullptr;
     // std::unique_ptr<GraphNode> rootNode(nullptr);
@@ -235,21 +235,22 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    std::cout << "add chatbot to graph root node" << std::endl;
+    // std::cout << "add chatbot to graph root node" << std::endl;
     
     ChatBot chatbot_for_graph = ChatBot("../images/chatbot.png");
     chatbot_for_graph.SetChatLogicHandle(this);
     chatbot_for_graph.SetRootNode(rootNode);
     // _chatBot->SetRootNode(rootNode);
     
-    std::cout << "chatbot_for_graph->SetRootNode COMPLETE" << std::endl;
+    // std::cout << "chatbot_for_graph->SetRootNode COMPLETE" << std::endl;
+    std::cout << "move local chatBot" << std::endl;
     rootNode->MoveChatbotHere(std::move(chatbot_for_graph));
     // rootNode->MoveChatbotHere(_chatBot);
-    std::cout << "rootNode->MoveChatbotHere COMPLETE" << std::endl;
+    // std::cout << "rootNode->MoveChatbotHere COMPLETE" << std::endl;
     
     ////
     //// EOF STUDENT CODE
-    std::cout << "exiting ChatLogic::LoadAnswerGraphFromFile" << std::endl;
+    // std::cout << "exiting ChatLogic::LoadAnswerGraphFromFile" << std::endl;
 }
 
 void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
@@ -259,6 +260,7 @@ void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
 
 void ChatLogic::SetChatbotHandle(ChatBot *chatbot)
 {
+    std::cout << "ChatLogic::SetChatbotHandle()" << std::endl;
     _chatBot = chatbot;
 }
 

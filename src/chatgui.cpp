@@ -130,13 +130,13 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
-    std::cout << "DONE accessing member function: SetPanelDialogHandle" << std::endl;
+    // std::cout << "DONE accessing member function: SetPanelDialogHandle" << std::endl;
     // load answer graph from file
     
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
-    std::cout << "DONE accessing member function: LoadAnswerGraphFromFile" << std::endl;
+    // std::cout << "DONE accessing member function: LoadAnswerGraphFromFile" << std::endl;
 
-    std::cout << "exiting ChatBotPanelDialog()" << std::endl;
+    // std::cout << "exiting ChatBotPanelDialog()" << std::endl;
     ////
     //// EOF STUDENT CODE
 }
@@ -146,11 +146,10 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    if(_chatLogic) {
-        std::cout << "chatLogic exists" << std::endl;
-    } else {
-        std::cout << "chatLogic does NOT exist" << std::endl;
-    }
+    // if(_chatLogic) {
+    // } else {
+    //     std::cout << "chatLogic does NOT exist" << std::endl;
+    // }
     // delete _chatLogic;
 
     ////

@@ -83,7 +83,7 @@ ChatBot::ChatBot(ChatBot &&source)
     source._image = NULL;
 }
 
-ChatBot &ChatBot::operator=(ChatBot &source)
+ChatBot &ChatBot::operator = (ChatBot &&source)
 {
     std::cout << "ChatBot Move Assingment" << std::endl;
     if (this == &source)
@@ -142,10 +142,10 @@ void ChatBot::ReceiveMessageFromUser(std::string message)
 
 void ChatBot::SetCurrentNode(GraphNode *node)
 {
-    std::cout << "in ChatBot::SetCurrentNode" << std::endl;
+    // std::cout << "in ChatBot::SetCurrentNode" << std::endl;
     // update pointer to current node
     _currentNode = node;
-    std::cout << "update pointer to current node" << std::endl;
+    // std::cout << "update pointer to current node" << std::endl;
 
     // select a random node answer (if several answers should exist)
     std::vector<std::string> answers = _currentNode->GetAnswers();
@@ -154,9 +154,9 @@ void ChatBot::SetCurrentNode(GraphNode *node)
     std::string answer = answers.at(dis(generator));
 
     // send selected node answer to user
-    std::cout << "send selected node answer to user" << std::endl;
+    // std::cout << "send selected node answer to user" << std::endl;
     _chatLogic->SendMessageToUser(answer);
-    std::cout << "exiting ChatBot::SetCurrentNode" << std::endl;
+    // std::cout << "exiting ChatBot::SetCurrentNode" << std::endl;
 
 }
 
