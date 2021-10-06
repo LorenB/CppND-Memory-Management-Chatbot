@@ -51,6 +51,7 @@ ChatBot::ChatBot(const ChatBot &source) // copy constructor
     _rootNode = source._rootNode;
     // TODO: is copying sufficient?
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     // TODO: do we need to allocate more new memory?
     _image = new wxBitmap(*source._image);
 }
@@ -62,20 +63,24 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
         return *this;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _image = new wxBitmap(*source._image);
     return *this;
 }
 
 ChatBot::ChatBot(ChatBot &&source)
 {
-    std::cout << "Move Constructor" << std::endl;
-    delete _image;
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    // delete _image;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
-    _image = new wxBitmap(*source._image);
+    _chatLogic->SetChatbotHandle(this);
+    // _image = new wxBitmap(*source._image);
+    _image = source._image;
+
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
-    source._image = nullptr;
+    source._image = NULL;
 }
 
 ChatBot &ChatBot::operator=(ChatBot &source)
@@ -86,7 +91,9 @@ ChatBot &ChatBot::operator=(ChatBot &source)
     delete _image;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
-    _image = new wxBitmap(*source._image);
+    _chatLogic->SetChatbotHandle(this);
+    _image = source._image;
+    // _image = new wxBitmap(*source._image);
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
     source._image = nullptr;
