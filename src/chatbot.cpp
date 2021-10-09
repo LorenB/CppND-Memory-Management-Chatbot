@@ -45,14 +45,11 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 ChatBot::ChatBot(const ChatBot &source) // copy constructor
-    //   : _image{new wxBitmap{*(source._image)}}
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
     _rootNode = source._rootNode;
-    // TODO: is copying sufficient?
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
-    // TODO: do we need to allocate more new memory?
     _image = new wxBitmap(*source._image);
 }
 
@@ -71,11 +68,9 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
 ChatBot::ChatBot(ChatBot &&source)
 {
     std::cout << "ChatBot Move Constructor" << std::endl;
-    // delete _image;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
-    // _image = new wxBitmap(*source._image);
     _image = source._image;
 
     source._rootNode = nullptr;
@@ -93,7 +88,6 @@ ChatBot &ChatBot::operator = (ChatBot &&source)
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
     _image = source._image;
-    // _image = new wxBitmap(*source._image);
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
     source._image = nullptr;
@@ -142,10 +136,8 @@ void ChatBot::ReceiveMessageFromUser(std::string message)
 
 void ChatBot::SetCurrentNode(GraphNode *node)
 {
-    // std::cout << "in ChatBot::SetCurrentNode" << std::endl;
     // update pointer to current node
     _currentNode = node;
-    // std::cout << "update pointer to current node" << std::endl;
 
     // select a random node answer (if several answers should exist)
     std::vector<std::string> answers = _currentNode->GetAnswers();
@@ -154,9 +146,7 @@ void ChatBot::SetCurrentNode(GraphNode *node)
     std::string answer = answers.at(dis(generator));
 
     // send selected node answer to user
-    // std::cout << "send selected node answer to user" << std::endl;
     _chatLogic->SendMessageToUser(answer);
-    // std::cout << "exiting ChatBot::SetCurrentNode" << std::endl;
 
 }
 

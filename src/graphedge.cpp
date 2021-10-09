@@ -10,7 +10,7 @@ GraphEdge::GraphEdge(int id)
 
 GraphEdge::~GraphEdge()
 {
-    std::cout << "GraphEdge Destructor" << std::endl;
+    
 }
 
 void GraphEdge::SetChildNode(GraphNode *childNode)
